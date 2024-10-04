@@ -7,24 +7,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $precio = $_POST['precio'];
     $id = $_POST['id'];
 
-    $stmt = $pdo->prepare("UPDATE jabones SET nombre = ?, precio = ? WHERE id = ?");
-    $stmt->execute([$nombre, $precio, $id]);
+    // TODO comprobar si falta o sobra algo
+    $stmt = $pdo->prepare("UPDATE libros SET nombre = ?, precio = ? WHERE id = ?");
+    $stmt->execute([$nombre, $precio, $id, $descripcion]);
 
     header('Location: index.php');
     exit;
 }
 
 $id = $_GET['id'];
-$stmt = $pdo->query("SELECT * FROM jabones WHERE id = $id");
-$jabon = $stmt->fetch();
+$stmt = $pdo->query("SELECT * FROM libros WHERE id = $id");
+$libro = $stmt->fetch();
 
 ?>
 
-<h2>Editar Jabón</h2>
+<h2>Editar Libro</h2>
 
 <form action="edit.php" method="post">
-    <input type="hidden" name="id" value="<?php echo $jabon['id']; ?>">
-    Nombre: <input type="text" name="nombre" value="<?php echo $jabon['nombre']; ?>"><br>
-    Precio: $<input type="text" name="precio" value="<?php echo $jabon['precio']; ?>"><br>
+    <input type="hidden" name="id" value="<?php echo $libro['id']; ?>">
+    Nombre: <input type="text" name="nombre" value="<?php echo $libro['nombre']; ?>"><br>
+    Precio: $<input type="text" name="precio" value="<?php echo $libro['precio']; ?>"><br>
+    Descripción: $<input type="text" name="descripcion" value="<?php echo $libro['descripcion']; ?>" ><br>
     <input type="submit" value="Guardar Cambios">
 </form>
