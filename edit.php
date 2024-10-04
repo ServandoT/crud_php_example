@@ -7,8 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $precio = $_POST['precio'];
     $id = $_POST['id'];
 
-    // TODO comprobar si falta o sobra algo
-    $stmt = $pdo->prepare("UPDATE libros SET nombre = ?, precio = ? WHERE id = ?");
+    // TODO no funciona el cambio de descripcion
+    $stmt = $pdo->prepare("UPDATE libros SET nombre = ?, precio = ?, descripcion = ? WHERE id = ?");
     $stmt->execute([$nombre, $precio, $id, $descripcion]);
 
     header('Location: index.php');
